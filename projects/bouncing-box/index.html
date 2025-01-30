@@ -79,7 +79,7 @@
 				var speed = 10;
 				var positionY = 0;
 				var speedY = 10;
-				var boardHeight = jQuery(window).height(70);
+				var boardHeight = jQuery(window).height();
 
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -99,10 +99,10 @@
 				if (positionX < 0){
 					speed = -speed
 				}
-				if(positionY > boardHeight - 70){
+				if(positionY > boardHeight - 73){
 					speedY = -speedY
 				}
-				if(positionY < boardHeight + 70){
+				if(positionY < 0){
 					speedY = -speedY
 				}
 			};
