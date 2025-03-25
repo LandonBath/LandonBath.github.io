@@ -18,10 +18,23 @@ var runLevels = function (window) {
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
-
-    
-
+    function createObstacles(x, y, hitSize, damage){
+      var hitZoneSize = hitSize;// the size of hitbox for the obstacles and you
+    var damageFromObstacle = damage;// how much damage it does
+    var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);// creates the obstacles
+    obstacleHitZone.x = x;// sets the x coordinates for the obstacles
+    obstacleHitZone.y = y;// sets the y coordinates for the obstacles
+    game.addGameItem(obstacleHitZone);// adds the obstacles to the game
+    var obstacleImage = draw.bitmap("img/sawblade.png");// draws a obstacle bitmap and store it as obst
+    obstacleHitZone.addChild(obstacleImage);
+    obstacleImage.x = -25;
+    obstacleImage.y = -25;
+    }
+    createObstacles( 400, groundY - 50, 25, 10);
+    createObstacles( 400, groundY - 50, 25, 20);
+    createObstacles( 400, groundY - 50, 25, 100);
     function startLevel() {
+    
       // TODO 13 goes below here
 
 
