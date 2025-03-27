@@ -56,9 +56,7 @@ var runLevels = function (window) {
         //enemy.flyTo(0,0);
       };
     }
-    createEnemy(1900, groundY - 50, 2, -15);
-    createEnemy(1000, groundY - 50, 2, -15);
-    createEnemy(1600, groundY - 50, 2, -15);
+    
     
 
     function createReward(x, y, speed, health){
@@ -80,7 +78,7 @@ var runLevels = function (window) {
       };
     }
 
-    createReward(500, groundY - 100, 3, 10);
+    
 
 
     function createLevel(x, y, speed){
@@ -99,7 +97,7 @@ var runLevels = function (window) {
       };
     }
 
-    createLevel(1500, groundY - 50, 3);
+    
 
     function startLevel() {
     
@@ -111,7 +109,7 @@ var runLevels = function (window) {
         var element = levelObjects[i];
 
         if(element.type === "sawblade"){
-
+          createObstacles(element.x, element.y, element.hitSize, element.damage);
         }
       }
 
