@@ -15,9 +15,9 @@ var makeLevelData = function (window) {
         number: 1,
         speed: -3,
         gameItems: [
-          { type: "sawblade", x: 1800, y: groundY - 50, hitSize: 20, damage: 20 },
-          { type: "sawblade", x: 1400, y: groundY - 50, hitSize: 20, damage: 20 },
-          { type: "sawblade", x: 1100, y: groundY - 50, hitSize: 20, damage: 20 },
+          { type: "sawblade", x: 1800, y: groundY - 30, hitSize: 20, damage: 20 },
+          { type: "sawblade", x: 1400, y: groundY - 101, hitSize: 20, damage: 20 },
+          { type: "sawblade", x: 1100, y: groundY - 30, hitSize: 20, damage: 20 },
 
           { type: "enemy", x: 2400, y: groundY - 50, speed: 5, health: -15 },
           { type: "enemy", x: 1000, y: groundY - 50, speed: 5, health: -15 },
