@@ -18,14 +18,14 @@ var runLevels = function (window) {
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
-    function createObstacles(x, y, hitSize, damage){
+    function createObstacles(x, y, hitSize, damage, image){
       var hitZoneSize = hitSize;// the size of hitbox for the obstacles and you
       var damageFromObstacle = damage;// how much damage it does
       var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);// creates the obstacles
       obstacleHitZone.x = x;// sets the x coordinates for the obstacles
       obstacleHitZone.y = y;// sets the y coordinates for the obstacles
       game.addGameItem(obstacleHitZone);// adds the obstacles to the game
-      var obstacleImage = draw.bitmap("img/sawblade.png");// draws a obstacle bitmap and store it as obstacles
+      var obstacleImage = draw.bitmap(image);// draws a obstacle bitmap and store it as obstacles
       obstacleHitZone.addChild(obstacleImage);// attach the image to the obstacle hitzone
       obstacleImage.x = -25;// position the image on the hitzone's x value by moving it left 25 pixel
       obstacleImage.y = -25;// position the image on the hitzone's y value by moving it up 25 pixel
@@ -109,7 +109,7 @@ var runLevels = function (window) {
         var element = levelObjects[i];
 
         if(element.type === "sawblade"){// checks the type key:value of the gameItems objects to determine which object
-          createObstacles(element.x, element.y, element.hitSize, element.damage);// if the condition is true it will call the element
+          createObstacles(element.x, element.y, element.hitSize, element.damage, element.image);// if the condition is true it will call the element
         }
 
         if(element.type === "enemy"){// checks the type key:value of the gameItems objects to determine which object
