@@ -86,10 +86,10 @@ var runLevels = function (window) {
       var yellowSquare = draw.rect(50, 50, "yellow");// creates a yellow square and stores it in the ver yellowSquare
       yellowSquare.x = -25;// offsets the image from the hitzone by -25 pixels
       yellowSquare.y = -25;// offsets the image from the hitzone by -25 pixels
-      level.addChild(blueSquare);// add yellow square as a child to level code
+      level.addChild(yellowSquare);// add yellow square as a child to level code
       level.x = x;// x pos of level
       level.y = y;// y pos of level
-      game.addGameItem(reward);// adds level to the game
+      game.addGameItem(level);// adds level to the game
       level.velocityX -= speed;// how fast the level moves on the x axis
       level.onPlayerCollision = function () {
         level.shrink();
