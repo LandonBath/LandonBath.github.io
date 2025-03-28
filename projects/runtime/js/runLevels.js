@@ -108,9 +108,22 @@ var runLevels = function (window) {
       for(var i = 0; i < levelObjects.length; i++){
         var element = levelObjects[i];
 
-        if(element.type === "sawblade"){
-          createObstacles(element.x, element.y, element.hitSize, element.damage);
+        if(element.type === "sawblade"){// checks the type key:value of the gameItems objects to determine which object
+          createObstacles(element.x, element.y, element.hitSize, element.damage);// if the condition is true it will call the element
         }
+
+        if(element.type === "enemy"){// checks the type key:value of the gameItems objects to determine which object
+          createEnemy(element.x, element.y, element.speed, element.health);// if the condition is true it will call the element
+        }
+
+        if(element.type === "reward"){// checks the type key:value of the gameItems objects to determine which object
+          createReward(element.x, element.y, element.speed, element.health);// if the condition is true it will call the element
+        }
+
+        if(element.type === "level"){// checks the type key:value of the gameItems objects to determine which object
+          createLevel(element.x, element.y, element.speed);// if the condition is true it will call the element
+        }
+
       }
 
       //////////////////////////////////////////////
