@@ -29,7 +29,7 @@ var runLevels = function (window) {
       obstacleHitZone.addChild(obstacleImage);// attach the image to the obstacle hitzone
       obstacleImage.x = -25;// position the image on the hitzone's x value by moving it left 25 pixel
       obstacleImage.y = -25;// position the image on the hitzone's y value by moving it up 25 pixel
-      obstacleHitZone.rotationalVelocity = 3;
+      obstacleHitZone.rotationalVelocity = rotation;
       obstacleImage.scaleX = 1;
       obstacleImage.scaleY = 1;
     }
