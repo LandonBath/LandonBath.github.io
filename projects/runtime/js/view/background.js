@@ -62,8 +62,8 @@ var background = function (window) {
             
 
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            for (var i = 0; i < 9; i++) { // limits the amount of buildings you can have
-                var buildingColors = ["white", "blue", "gray", "orange","purple", "white", "blue", "gray", "orange","purple"];
+            for (var i = 0; i < 7; i++) { // limits the amount of buildings you can have
+                var buildingColors = ["white", "blue", "gray", "orange","purple", "white", "blue"];
                 var buildingHeight = 300 * Math.random();// the defalt height of the buildings
                 var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1);// makes the shape of the building
                 building.x = 200 * i;// the width of the building
