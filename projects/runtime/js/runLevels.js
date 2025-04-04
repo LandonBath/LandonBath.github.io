@@ -34,6 +34,7 @@ var runLevels = function (window) {
       obstacleImage.scaleY = 1;
     }
 
+
     //createObstacles(400, groundY - 50, 25, 10);
     //createObstacles(800, groundY - 50, 100, 20);
     //createObstacles(1000, groundY - 50, 10, 100);
