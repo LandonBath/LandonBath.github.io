@@ -40,9 +40,9 @@ var runLevels = function (window) {
     //createObstacles(1000, groundY - 50, 10, 100);
     
 
-    function createEnemy(x, y, speed, health, image){
+    function createEnemy(x, y, speed, health){
       var enemy = game.createGameItem("enemy", 25); // creates enemy game item and adds it to game
-      var redSquare = draw.bitmap(image); // creates a red square and stores it in the ver redSquare
+      var redSquare = draw.rect(50, 50, "red"); // creates a red square and stores it in the ver redSquare
       redSquare.x = -25; // offsets the image from the hitzone by -25 pixels
       redSquare.y = -25; // offsets the image from the hitzone ny -25 pixels
       enemy.addChild(redSquare); // add red square as a child to enemy code
@@ -64,19 +64,22 @@ var runLevels = function (window) {
     
     
 
-    function createReward(x, y, speed, health){
+    function createReward(x, y, speed, health, image){
       var reward = game.createGameItem("reward", 25); // creates reward game item and adds it to game
-      var blueSquare = draw.rect(50, 50, "blue"); // creates a blue square and stores it in the ver blueSquare
-      blueSquare.x = -25; // offsets the image from the hitzone by -25 pixels
-      blueSquare.y = -25; // offsets the image from the hitzone ny -25 pixels
+      var rewardImage = draw.bitmap(image); // creates a blue square and stores it in the ver blueSquare
+      rewardImage.x = -25; // offsets the image from the hitzone by -25 pixels
+      rewardImage.y = -25; // offsets the image from the hitzone by -25 pixels
       reward.addChild(blueSquare);// add blue square as a child to reward code
       reward.x = x; // x pos of reward
       reward.y = y; // y pos of reward
       game.addGameItem(reward); // adds reward to the game
       reward.velocityX -= speed; // how fast the reward moves on the x axis
+      
       reward.onPlayerCollision = function () {
         game.increaseScore(50); // increases your score when halle shoots the enemy
         game.changeIntegrity(health); // subtracts 10 health from hallBot's HUD
+        rewardImage.scaleX = 0.5;
+        rewardImage.scaleY = 0.5;
         reward.fadeOut(); // reward fades out when Halle shoots them
         //enemy.shrink();
         //enemy.flyTo(0,0);
@@ -118,11 +121,11 @@ var runLevels = function (window) {
         }
 
         if(element.type === "enemy"){ // checks the type key:value of the gameItems objects to determine which object
-          createEnemy(element.x, element.y, element.speed, element.health, element.image); // if the condition is true it will call the element
+          createEnemy(element.x, element.y, element.speed, element.health); // if the condition is true it will call the element
         }
 
         if(element.type === "reward"){ // checks the type key:value of the gameItems objects to determine which object
-          createReward(element.x, element.y, element.speed, element.health); // if the condition is true it will call the element
+          createReward(element.x, element.y, element.speed, element.health, element.image); // if the condition is true it will call the element
         }
 
         if(element.type === "level"){ // checks the type key:value of the gameItems objects to determine which object

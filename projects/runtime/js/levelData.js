@@ -19,11 +19,11 @@ var makeLevelData = function (window) {
           { type: "sawblade", x: 2200, y: groundY - 30, hitSize: 25, damage: 25, image: "img/sawblade.png", rotation: 0 },
           { type: "sawblade", x: 2500, y: groundY - 30, hitSize: 25, damage: 23, image: "img/sawblade.png", rotation: 0 },
 
-          { type: "enemy", x: 2700, y: groundY - 50, speed: 5, health: -15, image: "img/Health.png" },
-          { type: "enemy", x: 1000, y: groundY - 50, speed: 5, health: -15, image: "img/Health.png" },
-          { type: "enemy", x: 1900, y: groundY - 50, speed: 5, health: -15, image: "img/Health.png" },
+          { type: "enemy", x: 2700, y: groundY - 50, speed: 5, health: -15, },
+          { type: "enemy", x: 1000, y: groundY - 50, speed: 5, health: -15, },
+          { type: "enemy", x: 1900, y: groundY - 50, speed: 5, health: -15, },
 
-          { type: "reward", x: 2600, y: groundY - 50, speed: 1, health: 50 },
+          { type: "reward", x: 2600, y: groundY - 50, speed: 1, health: 50, image: "img/Health.png" },
 
           { type: "level", x: 3000, y: groundY - 50, speed: 1 },
         ],
