@@ -40,9 +40,9 @@ var runLevels = function (window) {
     //createObstacles(1000, groundY - 50, 10, 100);
     
 
-    function createEnemy(x, y, speed, health){
+    function createEnemy(x, y, speed, health, image){
       var enemy = game.createGameItem("enemy", 25); // creates enemy game item and adds it to game
-      var redSquare = draw.rect(50, 50, "red"); // creates a red square and stores it in the ver redSquare
+      var redSquare = draw.bitmap(image); // creates a red square and stores it in the ver redSquare
       redSquare.x = -25; // offsets the image from the hitzone by -25 pixels
       redSquare.y = -25; // offsets the image from the hitzone ny -25 pixels
       enemy.addChild(redSquare); // add red square as a child to enemy code
@@ -118,7 +118,7 @@ var runLevels = function (window) {
         }
 
         if(element.type === "enemy"){ // checks the type key:value of the gameItems objects to determine which object
-          createEnemy(element.x, element.y, element.speed, element.health); // if the condition is true it will call the element
+          createEnemy(element.x, element.y, element.speed, element.health, element.image); // if the condition is true it will call the element
         }
 
         if(element.type === "reward"){ // checks the type key:value of the gameItems objects to determine which object
