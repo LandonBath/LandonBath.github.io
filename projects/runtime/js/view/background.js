@@ -54,7 +54,7 @@ var background = function (window) {
 
             var moon = draw.bitmap("img/moon.png");// creates a bitmap object using the moon image and stores it in the variable
             moon.x = canvas.width - 500;// sets the moon's x position
-            moon.y = groundY - 400;// sets the moon's y position
+            moon.y = groundY - 350;// sets the moon's y position
             moon.scaleX = 0.5;// scales the moon's width
             moon.scaleY = 0.5;// scales the moon's height
             background.addChild(moon);// add the moon to the background container
@@ -63,7 +63,7 @@ var background = function (window) {
 
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             for (var i = 0; i < 7; i++) { // limits the amount of buildings you can have
-                var buildingColors = ["white", "blue", "gray", "orange","purple", "white", "seal"];
+                var buildingColors = ["white", "blue", "gray", "#48494B", "maroon", "white", "seal"];
                 var buildingHeight = 300 * Math.random(); // the defalt height of the buildings
                 var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1);// makes the shape of the building
                 building.x = 200 * i; // the width of the building
