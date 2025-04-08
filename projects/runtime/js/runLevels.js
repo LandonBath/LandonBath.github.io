@@ -42,7 +42,7 @@ var runLevels = function (window) {
 
     function createEnemy(x, y, speed, health){
       var enemy = game.createGameItem("enemy", 25); // creates enemy game item and adds it to game
-      var redSquare = draw.rect(50, 50, "red"); // creates a red square and stores it in the ver redSquare
+      var redSquare = draw.rect(50, 50, "red"); // creates a red square and stores it in the var redSquare
       redSquare.x = -25; // offsets the image from the hitzone by -25 pixels
       redSquare.y = -25; // offsets the image from the hitzone ny -25 pixels
       enemy.addChild(redSquare); // add red square as a child to enemy code
@@ -67,19 +67,18 @@ var runLevels = function (window) {
     function createReward(x, y, speed, health, image){
       var reward = game.createGameItem("reward", 25); // creates reward game item and adds it to game
       var rewardImage = draw.bitmap(image); // creates a blue square and stores it in the ver blueSquare
-      rewardImage.x = -25; // offsets the image from the hitzone by -25 pixels
-      rewardImage.y = -25; // offsets the image from the hitzone by -25 pixels
-      reward.addChild(blueSquare);// add blue square as a child to reward code
+      rewardImage.x = -45; // offsets the image from the hitzone by -25 pixels
+      rewardImage.y = -35; // offsets the image from the hitzone by -25 pixels
+      reward.addChild(rewardImage);// add blue square as a child to reward code
       reward.x = x; // x pos of reward
       reward.y = y; // y pos of reward
       game.addGameItem(reward); // adds reward to the game
       reward.velocityX -= speed; // how fast the reward moves on the x axis
-      
+      rewardImage.scaleX = 0.5;
+      rewardImage.scaleY = 0.5;
       reward.onPlayerCollision = function () {
-        game.increaseScore(50); // increases your score when halle shoots the enemy
+        game.increaseScore(150); // increases your score when halle shoots the enemy
         game.changeIntegrity(health); // subtracts 10 health from hallBot's HUD
-        rewardImage.scaleX = 0.5;
-        rewardImage.scaleY = 0.5;
         reward.fadeOut(); // reward fades out when Halle shoots them
         //enemy.shrink();
         //enemy.flyTo(0,0);
