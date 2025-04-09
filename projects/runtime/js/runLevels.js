@@ -40,17 +40,19 @@ var runLevels = function (window) {
     //createObstacles(1000, groundY - 50, 10, 100);
     
 
-    function createEnemy(x, y, speed, health){
+    function createEnemy(x, y, speed, health, image, xScale, yScale, hitX, hitY){
       var enemy = game.createGameItem("enemy", 25); // creates enemy game item and adds it to game
-      var redSquare = draw.rect(50, 50, "red"); // creates a red square and stores it in the var redSquare
-      redSquare.x = -25; // offsets the image from the hitzone by -25 pixels
-      redSquare.y = -25; // offsets the image from the hitzone ny -25 pixels
-      enemy.addChild(redSquare); // add red square as a child to enemy code
+      var redImage = draw.bitmap(image); // creates a red square and stores it in the var redSquare
+      redImage.x = hitX; // offsets the image from the hitzone by -25 pixels
+      redImage.y = hitY; // offsets the image from the hitzone ny -25 pixels
+      enemy.addChild(redImage); // add red square as a child to enemy code
       enemy.x = x; // x pos of enemy
       enemy.y = y; // y pos of enemy
       game.addGameItem(enemy); // adds enemy to the game
       enemy.velocityX -= speed; // how fast the enemy moves on the x axis
-      enemy.rotationalVelocity = 10; // sets the rotational velocity of the enemy
+      enemy.rotationalVelocity = 0; // sets the rotational velocity of the enemy
+      redImage.scaleX = xScale;
+      redImage.scaleY = yScale;
       enemy.onPlayerCollision = function () {
         game.changeIntegrity(health); // subtracts 10 health from hallBot's HUD
       };
@@ -120,7 +122,7 @@ var runLevels = function (window) {
         }
 
         if(element.type === "enemy"){ // checks the type key:value of the gameItems objects to determine which object
-          createEnemy(element.x, element.y, element.speed, element.health); // if the condition is true it will call the element
+          createEnemy(element.x, element.y, element.speed, element.health, element.image, element.xScale, element.yScale, element.hitX, element.hitY); // if the condition is true it will call the element
         }
 
         if(element.type === "reward"){ // checks the type key:value of the gameItems objects to determine which object
