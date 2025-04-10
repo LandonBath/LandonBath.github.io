@@ -26,9 +26,9 @@ var makeLevelData = function (window) {
           { type: "enemy", x: 3600, y: groundY - 70, speed: 7, health: -15, image: "img/lostSoul.png", xScale: 0.5, yScale: 0.5, hitX: -36, hitY: -60 },
           { type: "enemy", x: 2300, y: groundY - 70, speed: 7, health: -15, image: "img/lostSoul.png", xScale: 0.5, yScale: 0.5, hitX: -36, hitY: -60 },
 
-          { type: "reward", x: 3800, y: groundY - 10, speed: 1, health: 50, image: "img/Health.png" },
+          { type: "reward", x: 3800, y: groundY - 10, speed: 0.1, health: 50, image: "img/Health.png" },
 
-          { type: "level", x: 3950, y: groundY - 10, speed: 1 },
+          { type: "level", x: 3950, y: groundY - 10, speed: 0.1 },
         ],
       },
       {
