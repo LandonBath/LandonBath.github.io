@@ -29,7 +29,7 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE //////////////////////////////////////
         //////////////////////////////////////////////////////////////////
         // TODO (several):
-        var tree;
+        //var tree;
         var buildings = [];
       
         // called at the start of game and whenever the page is resized
@@ -40,8 +40,12 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,groundY,'lightblue');//makes rectangle and stores it in the variable backgroundFill
-            background.addChild(backgroundFill);
+            var night = draw.bitmap("img/night.png");//makes rectangle and stores it in the variable backgroundFill
+            night.scaleX = 3;
+            night.scaleY = 4;
+            night.x = canvas.width - 1000;
+            night.y = groundY - 500;
+            background.addChild(night);
             
             // TODO 2: - Add a moon and starfield
             for(var i = 0; i < 100; i++){
@@ -55,8 +59,8 @@ var background = function (window) {
             var moon = draw.bitmap("img/moon.png");// creates a bitmap object using the moon image and stores it in the variable
             moon.x = canvas.width - 500;// sets the moon's x position
             moon.y = groundY - 350;// sets the moon's y position
-            moon.scaleX = 0.5;// scales the moon's width
-            moon.scaleY = 0.5;// scales the moon's height
+            moon.scaleX = 1;// scales the moon's width
+            moon.scaleY = 1;// scales the moon's height
             background.addChild(moon);// add the moon to the background container
             
             
