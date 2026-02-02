@@ -29,7 +29,7 @@ $(document).ready(function () {
   // This line produces most of the data array and stores it in the variable "dataShapes"
   const dataShapes = generateShapeData();
   var currentIndex = 0;
-
+  dataShapes.push(shape);
   /////////////////////////////////////////////////
   // ALL OF YOUR CODE SHOULD GO BELOW HERE ////////
   /////////////////////////////////////////////////
