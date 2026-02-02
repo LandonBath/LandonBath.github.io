@@ -35,11 +35,12 @@ $(document).ready(function () {
   /////////////////////////////////////////////////
 
   // TODO 1: create a new shape object and add it to the array
-  const shape = {
+  var shape = {
     color: "blue",
     shape: "circle",
-    repeat: 3
+    repeat: "3"
   }
+  
 
   // TODO 2: add a new property to all data shapes
   for (let i = 0; i < dataShapes.length; i++) {
@@ -50,12 +51,12 @@ $(document).ready(function () {
     } else if (currentShape.color === "blue") {
       currentShape.goodBehavior = "blink";
     } else {
-      currentShape.goodBehavuor = "spin";
+      currentShape.goodBehavior = "spin";
     }
   }
 
   // TODO 3-a: add a function that handles the static display type
-  function handStatic(data) {
+  function handleStatic(data) {
     setBackgroundWithObject(data);
     animationDetails.displayType = 1;
   }
@@ -63,7 +64,7 @@ $(document).ready(function () {
   // TODO 4-a: add a function that handles the good display type
   function handleGood(color, shape, repeat) {
     setBackgroundWithSimple(color, shape, repeat);
-    animationDetails.displatType = 2;
+    animationDetails.displayType = 2;
   }
 
   // TODO 5-a: add a function that handles the bad display type
