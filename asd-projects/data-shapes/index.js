@@ -29,7 +29,7 @@ $(document).ready(function () {
   // This line produces most of the data array and stores it in the variable "dataShapes"
   const dataShapes = generateShapeData();
   var currentIndex = 0;
-  dataShapes.push(shape);
+  
   /////////////////////////////////////////////////
   // ALL OF YOUR CODE SHOULD GO BELOW HERE ////////
   /////////////////////////////////////////////////
@@ -40,7 +40,7 @@ $(document).ready(function () {
     shape: "circle",
     repeat: "3"
   }
-  
+  dataShapes.push(shape);
 
   // TODO 2: add a new property to all data shapes
   for (let i = 0; i < dataShapes.length; i++) {
@@ -106,6 +106,7 @@ $(document).ready(function () {
     const colors = ["red", "green", "blue"];
     const shapes = ["square", "triangle", "circle"];
     const repeats = [1, 2, 3];
+    
 
     for (var i = 0; i < colors.length; i++) {
       for (var j = 0; j < shapes.length; j++) {
@@ -126,10 +127,10 @@ $(document).ready(function () {
         }
       }
     }
-
+    
     return data;
   }
-
+  dataShapes.push(shape);
   // This function decrements the index of the currently selected object in the array (and resets the display type)
   function decrementIndex() {
     currentIndex = currentIndex ? currentIndex - 1 : dataShapes.length - 1;
