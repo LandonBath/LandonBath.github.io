@@ -47,7 +47,7 @@ $(document).ready(function () {
         makeDot(25, 25, dieID); // top left
         makeDot(25, 75, dieID); // bottom left
         makeDot(75, 25, dieID); // top right
-      }
+      } else if (randomNum === 6)
     }
 
     function handleClick() {
