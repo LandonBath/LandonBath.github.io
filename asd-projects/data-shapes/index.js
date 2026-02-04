@@ -40,7 +40,7 @@ $(document).ready(function () {
     shape: "circle",
     repeat: "3"
   }
-  dataShapes.push(shape);
+  
 
   // TODO 2: add a new property to all data shapes
   for (let i = 0; i < dataShapes.length; i++) {
@@ -130,7 +130,7 @@ $(document).ready(function () {
     
     return data;
   }
-  dataShapes.push(shape);
+  
   // This function decrements the index of the currently selected object in the array (and resets the display type)
   function decrementIndex() {
     currentIndex = currentIndex ? currentIndex - 1 : dataShapes.length - 1;
@@ -147,6 +147,7 @@ $(document).ready(function () {
   // This function resets the display type to the default display (only shows data)
   function resetDisplay() {
     const shapeData = dataShapes[currentIndex];
+    dataShapes.push(shape);
 
     // Reset all of the CSS and HTML
     $("#shape").css("background", "none");
