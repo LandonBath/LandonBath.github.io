@@ -27,14 +27,14 @@ $(document).ready(function () {
       $(dieID).empty();
       var randomNum = Math.ceil(Math.random() * 6);
       console.log(randomNum);
-            if (randomNum === 1) {
-        makeDot(50, 50, dieID); // middle middle
+      if (randomNum === 1) {
+        makeDot(40, 40, dieID); // middle middle
       } else if (randomNum === 2) {
-        makeDot(25, 25, dieID); // top left
-        makeDot(75, 75, dieID); // bottom right
+        makeDot(15, 15, dieID); // top left
+        makeDot(70, 70, dieID); // bottom right
       } else if (randomNum === 3) {
-        makeDot(25, 25, dieID); // top left
-        makeDot(75, 75, dieID); // bottom right
+        makeDot(15, 15, dieID); // top left
+        makeDot(40, 40, dieID); // bottom right
         makeDot(50, 50, dieID); // middle middle
       } else if (randomNum === 4) {
         makeDot(75, 75, dieID); // bottom right
@@ -47,7 +47,14 @@ $(document).ready(function () {
         makeDot(25, 25, dieID); // top left
         makeDot(25, 75, dieID); // bottom left
         makeDot(75, 25, dieID); // top right
-      } else if (randomNum === 6)
+      } else if (randomNum === 6) {
+        makeDot ();
+        makeDot ();
+        makeDot ();
+        makeDot ();
+        makeDot ();
+        makeDot ();
+      }
     }
 
     function handleClick() {
