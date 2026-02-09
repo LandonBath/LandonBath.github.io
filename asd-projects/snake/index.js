@@ -96,11 +96,17 @@ function checkForNewDirection(event) {
 
   if (activeKey === KEY.LEFT) {
     snake.head.direction = "left";
+  } else if (activeKey === KEY.RIGHT) {
+    snake.head.direction = "right";
+  } else if (activeKey === KEY.UP) {
+    snake.head.direction = "up";
+  } else if (activeKey === KEY.DOWN) {
+    snake.head.direction = "down";
   }
 
   // FILL IN THE REST
 
-  // console.log(snake.head.direction);     // uncomment me!
+   //console.log(snake.head.direction);     // uncomment me!
 }
 
 function moveSnake() {
@@ -272,7 +278,8 @@ function makeSnakeSquare(row, column) {
 */
 function handleKeyDown(event) {
   // TODO 7: make the handleKeyDown function register which key is pressed
-
+  activeKey = event.which;
+  console.log(activeKey);
 
   // If a valid direction key is pressed, start the game
   if (
