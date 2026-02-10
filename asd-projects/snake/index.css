@@ -1,6 +1,6 @@
 
 body {
-  background-color: darkgreen;
+  background-image: url('https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41477-019-0374-3/MediaObjects/41477_2019_374_Figa_HTML.jpg');
 }
 
 #board {
@@ -35,3 +35,4 @@ body {
   background-color: red;
   z-index: 1;
 }
+
