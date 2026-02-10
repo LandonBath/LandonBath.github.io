@@ -179,7 +179,7 @@ function moveSnake() {
       return true;
     }
     return false;
-  
+  }
 
   
 
