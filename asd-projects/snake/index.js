@@ -175,7 +175,7 @@ function moveSnake() {
       
       //HINT: What will the row and column of the snake's head be if this were the case?
     
-    if(snake.head.row < 0 || snake.head.row >= ROWS || snake.head.column < 0 || snake.head.column >= COLUMNS) {
+    if(snake.head.row < 0 || snake.head.row >= ROWS|| snake.head.column < 0 || snake.head.column >= COLUMNS) {
       return true;
     }
     return false;
@@ -352,8 +352,8 @@ function getRandomAvailablePosition() {
 
   /* Generate random positions until one is found that doesn't overlap with the snake */
   while (!spaceIsAvailable) {
-    randomPosition.column = Math.floor(Math.random() * COLUMNS);
-    randomPosition.row = Math.floor(Math.random() * ROWS);
+    randomPosition.column = Math.floor(Math.random() * COLUMNS + 1);
+    randomPosition.row = Math.floor(Math.random() * ROWS + 1);
     spaceIsAvailable = true;
 
     /*
