@@ -140,7 +140,7 @@ function moveSnake() {
     of snake.head.direction which may be one of "left", "right", "up", or "down"
   */
   if (snake.head.direction === "left") {
-  snake.head.column = snake.head.column - 1;
+    snake.head.column = snake.head.column - 1;
   } else if (snake.head.direction === "right") {
     snake.head.column = snake.head.column + 1;
   } else if (snake.head.direction === "up") {
@@ -189,7 +189,9 @@ function hasCollidedWithApple() {
     HINT: Both the apple and the snake's head are aware of their own row and column
   */
 
-
+  if (snake.head.row === apple.row && snake.head.column === apple.column) {
+    return true;
+  }
 
   return false;
 }
@@ -217,9 +219,12 @@ function hasCollidedWithSnake() {
     HINT: Each part of the snake's body is stored in the snake.body Array. The
     head and each part of the snake's body also knows its own row and column.
   */
-
-
-
+  for (var i = 1; i < snake.body.length; i++) {
+    var bodySquare = snake.body[i];
+    if (snake.head.row === bodySquare.row && snake.head.column === currentSnakeSquare.column) {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -250,8 +255,11 @@ function endGame() {
 function makeApple() {
   // TODO 4, Part 2: Fill in this function's code block
   apple.element = $("<div>").addClass("apple").appendTo(board);
+  
   var randomPosition = getRandomAvailablePosition();
+
   apple.row = randomPosition.row;
+
   apple.column = randomPosition.column;
   repositionSquare(apple);
 
@@ -348,7 +356,12 @@ function getRandomAvailablePosition() {
       not occupied by a snakeSquare in the snake's body. If it is then set 
       spaceIsAvailable to false so that a new position is generated.
     */
-
+    for (var i = 0; i < snake.body.length; i++) {
+      var currentSnakeSquare = snake.body[i];
+      if (randomPosition.row === currentSnakeSquare.row && randomPosition.column === bodySquare.column) {
+        spaceIsAvailable = false;
+      }
+    }
 
 
   }
