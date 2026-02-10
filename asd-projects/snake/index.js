@@ -118,7 +118,14 @@ function moveSnake() {
     stored in the Array snake.body and each part knows its current 
     column/row properties. 
   */
+    for (var i = snake.body.length - 1; i > 0; i--) {
+    var currentSnakeSquare = snake.body[i];
+    var snakeSquareInFront = snake.body[i - 1];
 
+    moveBodyAToBodyB(currentSnakeSquare, snakeSquareInFront);
+
+    repositionSquare(currentSnakeSquare);
+}
 
 
 
@@ -152,16 +159,13 @@ function moveSnake() {
 // TODO 9: Create a new helper function
 
  function moveBodyAToBodyB(bodyA, bodyB) {
-  bodyA.row = bodyB.row;
-  bodyA.column = bodyB.column;
-  bodyA.direction = bodyB.direction;
+    bodyA.row = bodyB.row;
+    bodyA.column = bodyB.column;
+    bodyA.direction = bodyB.direction;
  }
 
-console.log("Moving body A to body B...");
-setTimeout(() => {
-  moveBodyAToBodyB(snake.body[1], snake.head);
-  repositionSquare(snake.body[1]);
-}, 2_000);
+
+
 
 
 function hasHitWall() {
@@ -171,9 +175,9 @@ function hasHitWall() {
     
     HINT: What will the row and column of the snake's head be if this were the case?
   */
-
-
-
+  if(snake.head.row < 0 || snake.head.row >= ROWS - 1 || snake.head.column < 0 || snake.head.column >= COLUMNS - 1) {
+    return true;
+  }
   return false;
 }
 
