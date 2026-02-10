@@ -20,8 +20,8 @@ const apple = {};
  const snake = {};
 
 // Constant Variables
-var ROWS = 22;
-var COLUMNS = 22;
+var ROWS = 21;
+var COLUMNS = 21;
 var SQUARE_SIZE = 20;
 var KEY = {
   LEFT: 37,
@@ -168,18 +168,23 @@ function moveSnake() {
 
 
 
-function hasHitWall() {
-  /* 
-    TODO 11: Should return true if the snake's head has collided with the four walls of the
-    board, false otherwise.
+  function hasHitWall() {
     
-    HINT: What will the row and column of the snake's head be if this were the case?
-  */
-  if(snake.head.row < 0 || snake.head.row >= ROWS - 1 || snake.head.column < 0 || snake.head.column >= COLUMNS - 1) {
-    return true;
-  }
-  return false;
-}
+      //TODO 11: Should return true if the snake's head has collided with the four walls of the
+      //board, false otherwise.
+      
+      //HINT: What will the row and column of the snake's head be if this were the case?
+    
+    if(snake.head.row < 0 || snake.head.row >= ROWS || snake.head.column < 0 || snake.head.column >= COLUMNS) {
+      return true;
+    }
+    return false;
+  
+
+  
+
+
+
 
 function hasCollidedWithApple() {
   /* 
@@ -221,7 +226,7 @@ function hasCollidedWithSnake() {
   */
   for (var i = 1; i < snake.body.length; i++) {
     var bodySquare = snake.body[i];
-    if (snake.head.row === bodySquare.row && snake.head.column === currentSnakeSquare.column) {
+    if (snake.head.row === bodySquare.row && snake.head.column === bodySquare.column) {
       return true;
     }
   }
