@@ -23,6 +23,22 @@ $(document).ready(function () {
         .appendTo(elementToAppendTo); 
       }
 
+
+      function makeDot(top, left, elementToAppendTo) {
+        $("<div>").css({
+          height: 15,
+          width: 15,
+          backgroundColor: "black",
+          position: "absolute",
+          top: top,           
+          left: left,          
+        })
+        for (let i = 0; i < 9; i++) {
+          makeDot().appendTo('#die2');
+        } 
+      }
+
+
     function rollDie(dieID) {
       $(dieID).empty();
       var randomNum = Math.ceil(Math.random() * 6);
@@ -76,4 +92,11 @@ $(document).ready(function () {
     }
 
     $("#die").on("click", handleClick);
+
+    function handleClick2() {
+      rollDie("#die2"); 
+    }
+
+    $('#die2').on('click', handleClick2);
+
 });
