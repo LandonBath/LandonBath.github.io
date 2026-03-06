@@ -45,7 +45,16 @@ function applyFilter(filterFunction) {
 
 
 // TODO 9 Create the applyFilterNoBackground function
-
+function applyFilterNoBackground(filterFunction) {
+  for (var row = 0; row < image.length; row++) {
+    for (var column = 0; column < image[row].length; column++) {
+      var currentPixel = image[row][column];
+      if (!(currentPixel.r === 0 && currentPixel.g === 0 && currentPixel.b === 0)) {
+        filterFunction(currentPixel);
+      }
+    }
+  }
+}
 
 // TODO 6: Create the keepInBounds function
  function keepInBounds(value) {
