@@ -32,13 +32,30 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2, 3 & 5: Create the applyFilter function here
+function applyFilter(filterFunction) {
+  for (var row = 0; row < image.length; row++) {
+    for (var column = 0; column < image[row].length; column++) {
+      var currentPixel = image[row][column];
+      filterFunction(currentPixel);
+    }
+  }
+}
+
 
 
 // TODO 9 Create the applyFilterNoBackground function
 
 
 // TODO 6: Create the keepInBounds function
-
+ function keepInBounds(value) {
+   if (value < 0) {
+     return 0;
+   } else if (value > 255) {
+     return 255;
+   } else {
+     return value;
+   }
+ }
 
 // TODO 4: Create reddify filter function
 
