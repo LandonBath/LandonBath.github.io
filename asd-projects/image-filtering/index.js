@@ -20,7 +20,10 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-
+  applyFilter(reddify);
+  applyFilterNoBackground(decreaseBlue);
+  applyFilter(increaseGreenByBlue);
+  applyFilterNoBackground(reddify);
   
 
   // do not change the below line of code
@@ -37,7 +40,7 @@ function applyFilter(filterFunction) {
     for (var column = 0; column < image[row].length; column++) {
       var currentPixel = image[row][column];
       filterFunction(currentPixel);
-      console.log(image[i][j]);
+      
     }
   }
 }
