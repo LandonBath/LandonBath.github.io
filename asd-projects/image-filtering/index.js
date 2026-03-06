@@ -37,6 +37,7 @@ function applyFilter(filterFunction) {
     for (var column = 0; column < image[row].length; column++) {
       var currentPixel = image[row][column];
       filterFunction(currentPixel);
+      console.log(image[i][j]);
     }
   }
 }
@@ -58,9 +59,20 @@ function applyFilter(filterFunction) {
  }
 
 // TODO 4: Create reddify filter function
-
+function reddify(pixel) {
+  pixel.r = keepInBounds(pixel.r + 50);
+}
+var testArray = [100, 100, 100];
+reddify(testArray);
+console.log(testArray); // Should show [200, 100, 100]
 
 // TODO 7 & 8: Create more filter functions
+function decreaseBlue(pixel) {
+  pixel.b = keepInBounds(pixel.b - 50);
+}
 
+function increaseGreenByBlue(pixel) {
+  pixel.g = keepInBounds(pixel.g + pixel.b);
+}
 
 // CHALLENGE code goes below here
