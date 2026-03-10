@@ -20,10 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter(reddify);
-  applyFilterNoBackground(decreaseBlue);
-  applyFilter(increaseGreenByBlue);
-  applyFilterNoBackground(reddify);
+ 
   
 
   // do not change the below line of code
@@ -35,12 +32,12 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2, 3 & 5: Create the applyFilter function here
-function applyFilter(filterFunction) {
-  for (var row = 0; row < image.length; row++) {
-    for (var column = 0; column < image[row].length; column++) {
-      var currentPixel = image[row][column];
-      filterFunction(currentPixel);
-      
+function applyFilter(image, filterFunction) {
+  for (let i = 0; i < image.length; i++) {
+    for (let j = 0; j < image[i].length; j++) {
+      const currentPixel = image[i][j];
+      // Apply filter function and update pixel
+      image[i][j] = filterFunction(currentPixel);
     }
   }
 }
@@ -49,9 +46,9 @@ function applyFilter(filterFunction) {
 
 // TODO 9 Create the applyFilterNoBackground function
 function applyFilterNoBackground(filterFunction) {
-  for (var row = 0; row < image.length; row++) {
-    for (var column = 0; column < image[row].length; column++) {
-      var currentPixel = image[row][column];
+  for (var i = 0; i < image.length; i++) {
+    for (var j = 0; j < image[i].length; j++) {
+      var currentPixel = image[i][j];
       if (!(currentPixel.r === 0 && currentPixel.g === 0 && currentPixel.b === 0)) {
         filterFunction(currentPixel);
       }
