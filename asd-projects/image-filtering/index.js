@@ -20,7 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter(image, reddify);
+
   applyFilter(image, decreaseBlue);
   applyFilter(image, increaseGreenByBlue);
   
@@ -38,8 +38,7 @@ function applyFilter(image, filterFunction) {
   for (let i = 0; i < image.length; i++) {
     for (let j = 0; j < image[i].length; j++) {
       const currentPixel = image[i][j];
-      // Apply filter function and update pixel
-      image[i][j] = filterFunction(currentPixel);
+      filterFunction(currentPixel);
     }
   }
 }
@@ -47,11 +46,16 @@ function applyFilter(image, filterFunction) {
 
 
 // TODO 9 Create the applyFilterNoBackground function
-function applyFilterNoBackground(filterFunction) {
-  for (var i = 0; i < image.length; i++) {
-    for (var j = 0; j < image[i].length; j++) {
-      var currentPixel = image[i][j];
-      if (!(currentPixel.r === 0 && currentPixel.g === 0 && currentPixel.b === 0)) {
+function applyFilterNoBackground(image, filterFunction) {
+  // Assume the top-left pixel (row 0, column 0) is the background color
+  const bgColor = image[0][0];
+  
+  for (let i = 0; i < image.length; i++) {
+    for (let j = 0; j < image[i].length; j++) {
+      const currentPixel = image[i][j];
+      
+      // Check if the current pixel is different from the background color
+      if (currentPixel.r !== bgColor.r || currentPixel.g !== bgColor.g || currentPixel.b !== bgColor.b) {
         filterFunction(currentPixel);
       }
     }
@@ -60,22 +64,22 @@ function applyFilterNoBackground(filterFunction) {
 
 // TODO 6: Create the keepInBounds function
  function keepInBounds(value) {
-   if (value < 0) {
-     return 0;
-   } else if (value > 255) {
-     return 255;
-   } else {
-     return value;
-   }
- }
+    if (value < 0) {
+      return 0;
+    } else if (value > 255) {
+      return 255;
+    } else {
+      return value;
+    }
+  }
 
 // TODO 4: Create reddify filter function
 function reddify(pixel) {
   pixel.r = keepInBounds(pixel.r + 50);
 }
-var testArray = [200, 100, 100];
-reddify(testArray);
-console.log(testArray); 
+var testPixel = { r: 200, g: 100, b: 100 };
+reddify(testPixel);
+console.log(testPixel);
 
 // TODO 7 & 8: Create more filter functions
 function decreaseBlue(pixel) {
