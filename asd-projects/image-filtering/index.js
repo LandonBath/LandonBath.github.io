@@ -20,7 +20,9 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
- 
+  applyFilter(image, reddify);
+  applyFilter(image, decreaseBlue);
+  applyFilter(image, increaseGreenByBlue);
   
 
   // do not change the below line of code
@@ -71,9 +73,9 @@ function applyFilterNoBackground(filterFunction) {
 function reddify(pixel) {
   pixel.r = keepInBounds(pixel.r + 50);
 }
-var testArray = [100, 100, 100];
+var testArray = [200, 100, 100];
 reddify(testArray);
-console.log(testArray); // Should show [200, 100, 100]
+console.log(testArray); 
 
 // TODO 7 & 8: Create more filter functions
 function decreaseBlue(pixel) {
