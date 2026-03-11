@@ -25,7 +25,9 @@ function runProgram(){
     A: 65,
     W: 87,
     S: 83,
-    D: 68
+    D: 68,
+
+    SPACE: 32
   };
 
   // Game Item Objects
@@ -113,7 +115,15 @@ function runProgram(){
       player2.speedY = 5;
       player2.speedX = 0;
     }
+
+    if (event.which === KEY.SPACE){
+      colorChange(player1)
+      colorChange(player2)
+
+    }
   }
+
+  
 
   function handleKeyUp(event) {
     if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
@@ -165,6 +175,16 @@ function runProgram(){
     )
 
   }
+
+  function colorChange(player){
+      var randomColor = "#000000".replace(/0/g, function () {
+      return (~~(Math.random() * 16)).toString(16);
+    });
+
+    $(player.id).css("backgroundColor", randomColor);
+
+  }
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
