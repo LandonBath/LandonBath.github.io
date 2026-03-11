@@ -10,6 +10,11 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  const BOARD_WIDTH = $("#board").width();
+  const BOARD_HEIGHT = $("#board").height();
+  const PLAYER_WIDTH = $(".player").width();
+  const PLAYER_HEIGHT = $(".player").height();
+
   const KEY = {
     ENTER: 13,
     LEFT: 37,
@@ -17,12 +22,25 @@ function runProgram(){
     RIGHT: 39,
     DOWN: 40,
 
+    A: 65,
+    W: 87,
+    S: 83,
+    D: 68
   };
 
   // Game Item Objects
-  let walker = {
+  let player1 = {
+    id: "#player1",
     x: 0,
     y: 0,
+    speedX: 0,
+    speedY: 0
+  }
+
+  let player2 = {
+    id: "#player2",
+    x: BOARD_WIDTH - PLAYER_WIDTH,
+    y: BOARD_HEIGHT - PLAYER_HEIGHT,
     speedX: 0,
     speedY: 0
   }
@@ -36,7 +54,8 @@ function runProgram(){
 
   Note: You can have multiple event listeners for different types of events.
   */
-  $(document).on('keydown', handleKeyDown);                          
+  $(document).on('keydown', handleKeyDown);
+  $(document).on('keyup', handleKeyUp);                          
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -47,8 +66,17 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    repositionGameItem();
-    redrawGameItem();
+    repositionGameItem(player1);
+    repositionGameItem(player2);
+    wallCollision(player1);
+    wallCollision(player2);
+    redrawGameItem(player1);
+    redrawGameItem(player2);
+
+  }
+
+  if(doCollide(player1, player2)){
+    console.log("Tag!")
   }
   
   /* 
@@ -59,15 +87,45 @@ function runProgram(){
   */
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
-      walker.speedX = -5;
+      player1.speedX = -5;
+      player1.speedY = 0;
     } else if (event.which === KEY.RIGHT) {
-      walker.speedX = 5;
+      player1.speedX = 5;
+      player1.speedY = 0;
     } else if (event.which === KEY.UP) {
-      walker.speedY = -5;
+      player1.speedY = -5;
+      player1.speedX = 0;
     } else if (event.which === KEY.DOWN) {
-      walker.speedY = 5;
-    } else if (event.which === KEY.ENTER) {
-      walker.speedY = 5;
+      player1.speedY = 5;
+      player1.speedX = 0;
+    }
+
+    if (event.which === KEY.A) {
+      player2.speedX = -5;
+      player2.speedY = 0;
+    } else if (event.which === KEY.D) {
+      player2.speedX = 5;
+      player2.speedY = 0;
+    } else if (event.which === KEY.W) {
+      player2.speedY = -5;
+      player2.speedX = 0;
+    } else if (event.which === KEY.S) {
+      player2.speedY = 5;
+      player2.speedX = 0;
+    }
+  }
+
+  function handleKeyUp(event) {
+    if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
+      player1.speedX = 0;
+    } else if (event.which === KEY.UP || event.which === KEY.DOWN) {
+      player1.speedY = 0;
+    }
+
+    if (event.which === KEY.A || event.which === KEY.D) {
+      player2.speedX = 0;
+    } else if (event.which === KEY.W || event.which === KEY.S) {
+      player2.speedY = 0;
     }
   }
 
@@ -75,16 +133,38 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function repositionGameItem() {
-    walker.x += walker.speedX;
-    walker.y += walker.speedY;
+  function repositionGameItem(player) {
+    player.x += player.speedX;
+    player.y += player.speedY;
+    
   }
   
-  function redrawGameItem() {
-    $("#walker").css("left", walker.x);
-    $("#walker").css("top", walker.y);
+  function redrawGameItem(player) {
+    $(player.id).css("left", player.x);
+    $(player.id).css("top", player.y);
   }
 
+  function wallCollision(player) {
+    if(player.x > BOARD_WIDTH - PLAYER_WIDTH) {
+      player.x -= player.speedX;
+    } else if (player.x < 0) {
+      player.x -= player.speedX;
+    } else if (player.y > BOARD_HEIGHT - PLAYER_HEIGHT) {
+      player.y -= player.speedY;
+    } else if (player.y < 0) {
+      player.y -= player.speedY;
+    }
+  }
+
+  function doCollide(a, b) {
+    return (
+      a.x < b.x + PLAYER_WIDTH &&
+      a.x + PLAYER_WIDTH > b.x &&
+      a.y < b.y + PLAYER_HEIGHT &&
+      a.y + PLAYER_HEIGHT > b.y
+    )
+
+  }
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
