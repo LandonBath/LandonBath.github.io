@@ -11,7 +11,6 @@ $(document).ready(function () {
     })
     .appendTo("#die")
     
-
       // Function to create a dot at a specific position on the die
       function makeDot(top, left, elementToAppendTo) {
         $("<div>").css({
@@ -75,13 +74,20 @@ $(document).ready(function () {
             $(dieID).append(dot);
         }
     
-    // Event handler for clicking the die
-    function handleClick() {
-      rollDie("#die");
-    }
+      // Event handler for clicking the die
+      function handleClick() {
+        rollDie("#die");
+      }
 
-    // Attach the click event handler to the die
-    $("#die").on("click", handleClick);
+      // Attach the click event handler to the die
+      $("#die").on("click", handleClick);
+
+      function handleClick2() {
+        rollDie("#die2");
+      }
+
+      // Attach the click event handler to the die
+      $("#die2").on("click", handleClick2);
 
     
 });
