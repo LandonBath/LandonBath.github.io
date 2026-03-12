@@ -82,11 +82,12 @@ $(document).ready(function () {
       // Attach the click event handler to the die
       $("#die").on("click", handleClick);
 
+      // Event handler for clicking the die2
       function handleClick2() {
         rollDie("#die2");
       }
 
-      // Attach the click event handler to the die
+      // Attach the click event handler to the die2
       $("#die2").on("click", handleClick2);
 
     
