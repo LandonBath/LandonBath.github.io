@@ -75,11 +75,16 @@ function runProgram(){
     redrawGameItem(player1);
     redrawGameItem(player2);
 
+    if (doCollide(player1, player2)) {
+      colorChange(player1);
+      colorChange(player2);
+    }
+
+  
+
   }
 
-  if(doCollide(player1, player2)){
-    console.log("Tag!")
-  }
+  
   
   /* 
   This section is where you set up the event handlers for user input.
