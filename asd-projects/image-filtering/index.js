@@ -35,7 +35,7 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2, 3 & 5: Create the applyFilter function here
-function applyFilter(filterFunction) {
+function applyFilter(filterFunction) { 
   for (var i = 0; i < image.length; i++) {
     for (var j = 0; j < image[i].length; j++) {
       var pixel = image[i][j];
@@ -50,7 +50,8 @@ function applyFilter(filterFunction) {
 
 
 // TODO 9 Create the applyFilterNoBackground function
-function applyFilterNoBackground(filterFunction) {
+//Use a nested for loop to apply the filter to every pixel except the background
+function applyFilterNoBackground(filterFunction) { 
   var backgroundColor = image[0][0];
   for (var i = 0; i < image.length; i++) {
     for (var j = 0; j < image[i].length; j++) {
@@ -67,7 +68,8 @@ function applyFilterNoBackground(filterFunction) {
 }
 
 // TODO 6: Create the keepInBounds function
- function keepInBounds(num) {
+// this function should take in a number and return that number if it is between 0 and 255
+ function keepInBounds(num) { 
   if (num < 0) {
     return 0;
   }
@@ -78,17 +80,20 @@ function applyFilterNoBackground(filterFunction) {
 }
 
 // TODO 4: Create reddify filter function
+// this function should take in a pixel array and set the red value to 200
 function reddify(pixelArray) {
   pixelArray[RED] = 200;
 }
 
 // TODO 7 & 8: Create more filter functions
+// this function should decrease the blue value of a pixel by 50
 function decreaseBlue(pixelArray) {
   var newBlue = pixelArray[BLUE] - 50;
   newBlue = keepInBounds(newBlue);
   pixelArray[BLUE] = newBlue;
 }
 
+// this function should increase the green value of a pixel by the blue value of the same pixel
 function increaseGreenByBlue(pixelArray) {
   var newGreen = pixelArray[GREEN] + pixelArray[BLUE];
   newGreen = keepInBounds(newGreen);
