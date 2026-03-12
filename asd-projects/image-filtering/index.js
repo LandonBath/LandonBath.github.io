@@ -20,9 +20,11 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter(image, reddify);
-  applyFilter(image, increaseGreen);
-  applyFilter(image, decreaseBlue);
+
+  applyFilter(reddify);
+  applyFilterNoBackground(decreaseBlue);
+  applyFilter(increaseGreenByBlue);
+  applyFilterNoBackground(reddify);
 
   // do not change the below line of code
   render($("#display"), image);
@@ -33,11 +35,14 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2, 3 & 5: Create the applyFilter function here
-function applyFilter(image, filterFunction) {
-  for (var x = 0; x < image.width; x++) {
-    for (var y = 0; y < image.height; y++) {
-      var pixel = image.getPixel(x, y);
-      filterFunction(pixel);
+function applyFilter(filterFunction) {
+  for (var i = 0; i < image.length; i++) {
+    for (var j = 0; j < image[i].length; j++) {
+      var pixel = image[i][j];
+      var pixelArray = rgbStringToArray(pixel);
+      filterFunction(pixelArray);
+      var updatedPixel = rgbArrayToString(pixelArray);
+      image[i][j] = updatedPixel;
     }
   }
 }
@@ -45,16 +50,16 @@ function applyFilter(image, filterFunction) {
 
 
 // TODO 9 Create the applyFilterNoBackground function
-function applyFilterNoBackground(image, filterFunction) {
-  for (var x = 0; x < image.width; x++) {
-    for (var y = 0; y < image.height; y++) {
-
-      var pixel = image.getPixel(x, y);
-
-      if (!(pixel.getRed() > 200 &&
-            pixel.getGreen() > 200 &&
-            pixel.getBlue() > 200)) {
-        filterFunction(pixel);
+function applyFilterNoBackground(filterFunction) {
+  var backgroundColor = image[0][0];
+  for (var i = 0; i < image.length; i++) {
+    for (var j = 0; j < image[i].length; j++) {
+      if (image[i][j] !== backgroundColor) {
+        var pixel = image[i][j];
+        var pixelArray = rgbStringToArray(pixel);
+        filterFunction(pixelArray);
+        var updatedPixel = rgbArrayToString(pixelArray);
+        image[i][j] = updatedPixel;
       }
 
     }
@@ -62,34 +67,32 @@ function applyFilterNoBackground(image, filterFunction) {
 }
 
 // TODO 6: Create the keepInBounds function
- function keepInBounds(value) {
-  if (value < 0) {
-    value = 0;
+ function keepInBounds(num) {
+  if (num < 0) {
+    return 0;
   }
-  if (value > 255) {
-    value = 255;
+  if (num > 255) {
+    return 255;
   }
-  return value;
+  return num;
 }
 
 // TODO 4: Create reddify filter function
-function reddify(pixel) {
-  pixel.setRed(200);
+function reddify(pixelArray) {
+  pixelArray[RED] = 200;
 }
 
 // TODO 7 & 8: Create more filter functions
-function increaseGreen(pixel) {
-  var value = pixel.getGreen();
-  value = value + 50;
-  value = keepInBounds(value);
-  pixel.setGreen(value);
+function decreaseBlue(pixelArray) {
+  var newBlue = pixelArray[BLUE] - 50;
+  newBlue = keepInBounds(newBlue);
+  pixelArray[BLUE] = newBlue;
 }
 
-function decreaseBlue(pixel) {
-  var value = pixel.getBlue();
-  value = value - 50;
-  value = keepInBounds(value);
-  pixel.setBlue(value);
+function increaseGreenByBlue(pixelArray) {
+  var newGreen = pixelArray[GREEN] + pixelArray[BLUE];
+  newGreen = keepInBounds(newGreen);
+  pixelArray[GREEN] = newGreen;
 }
 
 // CHALLENGE code goes below here
