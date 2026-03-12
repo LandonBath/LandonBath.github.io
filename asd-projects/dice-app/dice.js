@@ -10,7 +10,9 @@ $(document).ready(function () {
       
     })
     .appendTo("#die")
+    
 
+      // Function to create a dot at a specific position on the die
       function makeDot(top, left, elementToAppendTo) {
         $("<div>").css({
           height: 15,
@@ -23,30 +25,27 @@ $(document).ready(function () {
         .appendTo(elementToAppendTo); 
       }
 
-
-    
-
-
+     // Function to roll the die and display the appropriate number of dots
       function rollDie(dieID) {
         $(dieID).empty();
         var randomNum = Math.ceil(Math.random() * 6);
         console.log(randomNum);
         if (randomNum === 1) {
-          makeDot(42, 42, dieID); // middle middle
+          makeDot(42, 42, dieID); // middle 
         } else if (randomNum === 2) {
           makeDot(10, 10, dieID); // top left
           makeDot(75, 75, dieID); // bottom right
         } else if (randomNum === 3) {
           makeDot(10, 10, dieID); // top left
           makeDot(75, 75, dieID); // bottom right
-          makeDot(42, 42, dieID); // middle middle
+          makeDot(42, 42, dieID); // middle 
         } else if (randomNum === 4) {
           makeDot(75, 75, dieID); // bottom right
           makeDot(10, 10, dieID); // top left
           makeDot(10, 75, dieID); // top right
           makeDot(75, 10, dieID); // bottom left
         } else if (randomNum === 5) {
-          makeDot(42, 42, dieID); // middle middle
+          makeDot(42, 42, dieID); // middle 
           makeDot(75, 75, dieID); // bottom right
           makeDot(10, 10, dieID); // top left
           makeDot(75, 10, dieID); // bottom left
@@ -61,6 +60,7 @@ $(document).ready(function () {
         }
       }
 
+        // Function to create a dot at a specific position on the die
         function makeDot(top, left, dieID) {
           var dot = $("<div></div>");
           dot.css({
@@ -74,10 +74,14 @@ $(document).ready(function () {
           });
             $(dieID).append(dot);
         }
-
+    
+    // Event handler for clicking the die
     function handleClick() {
       rollDie("#die");
     }
 
+    // Attach the click event handler to the die
     $("#die").on("click", handleClick);
+
+    
 });

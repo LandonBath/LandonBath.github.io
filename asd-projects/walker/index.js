@@ -92,7 +92,10 @@ function runProgram(){
   
   Note: You can have multiple event handlers for different types of events.
   */
+
+  // This function should cause the player to move in the direction when an arrow key is pressed.
   function handleKeyDown(event) {
+    // player 1 controls
     if (event.which === KEY.LEFT) {
       player1.speedX = -5;
       player1.speedY = 0;
@@ -106,7 +109,7 @@ function runProgram(){
       player1.speedY = 5;
       player1.speedX = 0;
     }
-
+    // player 2 controls
     if (event.which === KEY.A) {
       player2.speedX = -5;
       player2.speedY = 0;
@@ -120,7 +123,7 @@ function runProgram(){
       player2.speedY = 5;
       player2.speedX = 0;
     }
-
+    // spacebar controls
     if (event.which === KEY.SPACE){
       colorChange(player1)
       colorChange(player2)
@@ -130,13 +133,15 @@ function runProgram(){
 
   
 
+  // This function should cause the player to stop moving when the arrow keys are released.
   function handleKeyUp(event) {
+    // player 1 controls
     if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
       player1.speedX = 0;
     } else if (event.which === KEY.UP || event.which === KEY.DOWN) {
       player1.speedY = 0;
     }
-
+      // player 2 controls
     if (event.which === KEY.A || event.which === KEY.D) {
       player2.speedX = 0;
     } else if (event.which === KEY.W || event.which === KEY.S) {
@@ -148,17 +153,20 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  // This function updates the x and y coordinates of the player based on their speed
   function repositionGameItem(player) {
     player.x += player.speedX;
     player.y += player.speedY;
     
   }
-  
+
+  // This function changes the CSS of the player to move them to their new position on the board
   function redrawGameItem(player) {
     $(player.id).css("left", player.x);
     $(player.id).css("top", player.y);
   }
 
+  // This function checks if the player has collided with the wall, and if they have, it moves them back to their previous position
   function wallCollision(player) {
     if(player.x > BOARD_WIDTH - PLAYER_WIDTH) {
       player.x -= player.speedX;
@@ -171,6 +179,7 @@ function runProgram(){
     }
   }
 
+  // This function checks if two players collide and returns true if they do, and false if they don't
   function doCollide(a, b) {
     return (
       a.x < b.x + PLAYER_WIDTH &&
@@ -178,14 +187,15 @@ function runProgram(){
       a.y < b.y + PLAYER_HEIGHT &&
       a.y + PLAYER_HEIGHT > b.y
     )
-
+    
   }
 
+  // This function changes the color of the player to a random color when called
   function colorChange(player){
       var randomColor = "#000000".replace(/0/g, function () {
       return (~~(Math.random() * 16)).toString(16);
     });
-
+    // change the background color of the player to the random color
     $(player.id).css("backgroundColor", randomColor);
 
   }
