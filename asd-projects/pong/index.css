@@ -1,21 +1,55 @@
 
 body {
-  background-color: darkgreen;
+  background-color: rgb(119, 34, 34);
 }
 
 #board {
-  width: 440px;
-  height: 440px;
+  width: 1140px;
+  height: 640px;
   border: 1px solid white;
   background-color: black;
   position: relative;
 }
 
-#gameItem {
-  background-color: teal;
-  width: 50px;
-  height: 50px;
+#middleLine{
+  background-color: white;
+  width: 1px;
+  height: 640px;
   position: absolute;
-/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
-/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+  left: 570px;
+}
+
+#ball {
+  background-color: white;
+  border: 1px solid rgb(0, 0, 0);
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  position: absolute;
+  top: 320px;
+  left: 559px;
+}
+
+#leftPaddle{
+  background-color: white;
+  width: 15px;
+  height: 110px;
+  border-radius: 15px;
+  position: absolute;
+  top: 280px;
+  left: 10px;
+}
+
+#rightPaddle{
+  background-color: white;
+  width: 15px;
+  height: 110px;
+  border-radius: 15px;
+  position: absolute;
+  top: 280px;
+  left: 1115px;
+}
+
+#scorePlayer1{
+ 
 }
