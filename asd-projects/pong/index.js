@@ -27,8 +27,8 @@ function runProgram(){
   function createGameItem(id, speedX, speedY) {
     var item = {};
     item.id = id;
-    item.x = parseFloat($(id).css("left"));
-    item.y = parseFloat($(id).css("top"));
+    item.x = $(id).css("left");
+    item.y = $(id).css("top");
     item.width = $(id).width();
     item.height = $(id).height();
     item.speedX = speedX;
@@ -60,18 +60,13 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
 
   function moveBall() {
-    // update the position of the ball according to its speed
     ball.x += ball.speedX;
     ball.y += ball.speedY;
-
-    // move the HTML element with CSS left and top properties
     $(ball.id).css("left", ball.x);
     $(ball.id).css("top", ball.y);
   }
 
-  function wallCollision() {
-    
-  }
+  
 
   
   function endGame() {
