@@ -44,7 +44,8 @@ function runProgram(){
   */
   function newFrame() {
     moveBall();
-
+    leftPaddle();
+    rightPaddle();
   }
   
   /* 
@@ -66,17 +67,10 @@ function runProgram(){
     // move the HTML element with CSS left and top properties
     $(ball.id).css("left", ball.x);
     $(ball.id).css("top", ball.y);
+  }
 
+  function wallCollision() {
     
-    // check for collision with the walls and reverse direction if necessary
-      if (ball.y <= 0 || ball.y + ball.height >= $(window).height()) {
-        ball.speedY = -ball.speedY;
-      }
-      if (ball.x <= 0 || ball.x + ball.width >= $(window).width()) {
-        ball.speedX = -ball.speedX;
-      }
-
-      
   }
 
   
