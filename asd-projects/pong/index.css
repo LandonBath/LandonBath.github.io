@@ -50,10 +50,22 @@ body {
   left: 1115px;
 }
 
-#scorePlayer1{
+#scorePlayer2{
  background-color: white;
+  width: 110px;
+  height: 110px;
+  border-radius: 15px;
+  position: absolute;
+  top: 680px;
+  left: 1020px;
 }
 
-#scorePlayer2{
+#scorePlayer1{
   background-color: white;
+  width: 110px;
+  height: 110px;
+  border-radius: 15px;
+  position: absolute;
+  top: 680px;
+  left: 10px;
 }
