@@ -18,7 +18,9 @@ function runProgram(){
 
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('eventType', handleEvent);                           // change 'eventType' to the type of event you want to handle
+  $(document).on('eventType', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
+  $(document).on('keyup', handleKeyUp);
+  
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -36,6 +38,15 @@ function runProgram(){
     return item;
   }
 
+  const KEY = {
+    UP: 38,
+    DOWN: 40,
+
+    W: 87,
+    S: 83,
+  };
+
+
 
   
   /* 
@@ -51,8 +62,35 @@ function runProgram(){
   /* 
   Called in response to events.
   */
-  function handleEvent(event) {
+  function handleKeyDown(event) {
+    //player 1 controls
+    if (event.which === KEY.UP) {
+      leftPaddle.speedY = -5;
+      leftPaddle.speedX = 0;
+    } else if (event.which === KEY.DOWN) {
+      leftPaddle.speedY = 5;
+      leftPaddle.speedX = 0;
+    }
 
+    // player 2 controls
+    if (event.which === KEY.W) {
+      rightPaddle.speedY = -5;
+      rightPaddle.speedX = 0;
+    } else if (event.which === KEY.S) {
+      rightPaddle.speedY = 5;
+      rightPaddle.speedX = 0;
+    }
+  }
+
+  function handleKeyUp(event) {
+    // player 1 controls
+    if (event.which === KEY.UP || event.which === KEY.DOWN) {
+      leftPaddle.speedY = 0;
+    }
+      // player 2 controls
+    if (event.which === KEY.W || event.which === KEY.S) {
+      rightPaddle.speedY = 0;
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////

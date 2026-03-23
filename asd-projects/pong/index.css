@@ -69,3 +69,11 @@ body {
   top: 680px;
   left: 10px;
 }
+
+#pong-text {
+  color: white;
+  font-size: 50px;
+  position: absolute;
+  top: 50px;
+  left: 1460px;
+}
