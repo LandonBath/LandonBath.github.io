@@ -58,6 +58,14 @@ body {
   position: absolute;
   top: 680px;
   left: 1020px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
 }
 
 #scorePlayer1{
@@ -68,6 +76,14 @@ body {
   position: absolute;
   top: 680px;
   left: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
 }
 
 #pong-text {

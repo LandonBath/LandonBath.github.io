@@ -18,13 +18,17 @@ function runProgram(){
   var leftPaddle = makeGameItem("#leftPaddle");
   var rightPaddle = makeGameItem("#rightPaddle");
 
+  var scorePlayer1 = 0;
+  var scorePlayer2 = 0;
+
+  $("#scorePlayer1").text(scorePlayer1);
+  $("#scorePlayer2").text(scorePlayer2);
+
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on("keydown", handleKeyDown);
   $(document).on("keyup", handleKeyUp); 
   
-  
-
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -41,15 +45,10 @@ function runProgram(){
   return item;
  }
 
-
-
-
-  
   /* 
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
-  
   
   /* 
   Called in response to events.
@@ -90,6 +89,56 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  function wallCollision(obj){
+    
+    if (obj.id !== "#ball") {
+      if (obj.y <= 0) {
+        obj.y = 0;
+        obj.speedY = 0;
+      }
+      if (obj.y + obj.height >= BOARD_HEIGHT) {
+        obj.y = BOARD_HEIGHT - obj.height;
+        obj.speedY = 0;
+      }
+    }
+
+    if (obj.id === "#ball") {
+      if (obj.y <= 0 || obj.y + obj.height >= BOARD_HEIGHT) {
+        obj.speedY *= -1;
+      }
+
+      if (obj.x <= 0) {
+        scorePlayer2++;
+        $("#scorePlayer2").text(scorePlayer2);
+        startBall();
+        if (scorePlayer2 >= 11) {
+          alert("Player 2 wins!");
+          endGame();
+        }
+      }
+
+      if (obj.x + obj.width >= BOARD_WIDTH) {
+        scorePlayer1++;
+        $("#scorePlayer1").text(scorePlayer1);
+        startBall();
+
+        if (scorePlayer1 >= 11) {
+          alert("Player 1 wins!");
+          endGame();
+        }
+      }
+    }
+  }
+
+  function doCollide(a, b){
+    return !(
+      a.x > b.x + b.width ||
+      a.x + a.width < b.x ||
+      a.y > b.y + b.height ||
+      a.y + a.height < b.y
+    );
+  }
+
   function moveObject(obj) {
     obj.x += obj.speedX;
     obj.y += obj.speedY;
@@ -98,24 +147,29 @@ function runProgram(){
     $(obj.id).css("top", obj.y);
   }
 
-  function moveBall() {
-    ball.x += ball.speedX;
-    ball.y += ball.speedY;
-    $(ball.id).css("left", ball.x);
-    $(ball.id).css("top", ball.y);
-  }
-
   startBall();
 
   function startBall() {
-    ball.x = BOARD_WIDTH / 2;
-    ball.y = BOARD_HEIGHT / 2;
+    ball.x = BOARD_WIDTH / 2 - ball.width / 2;
+    ball.y = BOARD_HEIGHT / 2 - ball.height / 2;
 
-    ball.speedX = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
-    ball.speedY = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedX = (Math.random() * 3 + 3) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedY = (Math.random() * 3 + 3) * (Math.random() > 0.5 ? -1 : 1);
   }
 
-  
+  function newFrame(){
+    moveObject(ball);
+    moveObject(leftPaddle);
+    moveObject(rightPaddle);
+
+    wallCollision(ball);
+    wallCollision(leftPaddle);
+    wallCollision(rightPaddle);
+
+    if (doCollide(ball, leftPaddle) || doCollide(ball, rightPaddle)) {
+      ball.speedX = -ball.speedX;
+    }
+  }
 
   
   function endGame() {
