@@ -10,41 +10,37 @@ function runProgram(){
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  const BOARD_WIDTH = $("#board").width();
+  const BOARD_HEIGHT = $("#board").height();
   
   // Game Item Objects
-  var ball = createGameItem("#ball", 5, 5);
-  var leftPaddle = createGameItem("#leftPaddle", 0, 0);
-  var rightPaddle = createGameItem("#rightPaddle", 0, 0);
+  var ball = makeGameItem("#ball");
+  var leftPaddle = makeGameItem("#leftPaddle");
+  var rightPaddle = makeGameItem("#rightPaddle");
 
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('eventType', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-  $(document).on('keyup', handleKeyUp);
+  $(document).on("keydown", handleKeyDown);
+  $(document).on("keyup", handleKeyUp); 
+  
   
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function createGameItem(id, speedX, speedY) {
-    var item = {};
-    item.id = id;
-    item.x = $(id).css("left");
-    item.y = $(id).css("top");
-    item.width = $(id).width();
-    item.height = $(id).height();
-    item.speedX = speedX;
-    item.speedY = speedY;
-    return item;
-  }
+ function makeGameItem(id){
+  var item = {};
+  item.id = id;
+  item.x = parseFloat($(id).css("left"));
+  item.y = parseFloat($(id).css("top"));
+  item.width = $(id).width();
+  item.height = $(id).height();
+  item.speedX = 0;
+  item.speedY = 0;
+  return item;
+ }
 
-  const KEY = {
-    UP: 38,
-    DOWN: 40,
-
-    W: 87,
-    S: 83,
-  };
 
 
 
@@ -53,42 +49,39 @@ function runProgram(){
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
-  function newFrame() {
-    moveBall();
-    leftPaddle();
-    rightPaddle();
-  }
+  
   
   /* 
   Called in response to events.
   */
-  function handleKeyDown(event) {
-    //player 1 controls
-    if (event.which === KEY.UP) {
-      leftPaddle.speedY = -5;
-      leftPaddle.speedX = 0;
-    } else if (event.which === KEY.DOWN) {
-      leftPaddle.speedY = 5;
-      leftPaddle.speedX = 0;
-    }
+ 
+  const KEY = {
+    W: 87,
+    S: 83,
+    UP: 38,
+    DOWN: 40
+  };
 
-    // player 2 controls
+  function handleKeyDown(event) {
     if (event.which === KEY.W) {
+      leftPaddle.speedY = -5;
+    }
+    if (event.which === KEY.S) {
+      leftPaddle.speedY = 5;
+    }
+    if (event.which === KEY.UP) {
       rightPaddle.speedY = -5;
-      rightPaddle.speedX = 0;
-    } else if (event.which === KEY.S) {
+    }
+    if (event.which === KEY.DOWN) {
       rightPaddle.speedY = 5;
-      rightPaddle.speedX = 0;
     }
   }
 
   function handleKeyUp(event) {
-    // player 1 controls
-    if (event.which === KEY.UP || event.which === KEY.DOWN) {
+    if (event.which === KEY.W || event.which === KEY.S) {
       leftPaddle.speedY = 0;
     }
-      // player 2 controls
-    if (event.which === KEY.W || event.which === KEY.S) {
+    if (event.which === KEY.UP || event.which === KEY.DOWN) {
       rightPaddle.speedY = 0;
     }
   }
@@ -97,11 +90,29 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  function moveObject(obj) {
+    obj.x += obj.speedX;
+    obj.y += obj.speedY;
+
+    $(obj.id).css("left", obj.x);
+    $(obj.id).css("top", obj.y);
+  }
+
   function moveBall() {
     ball.x += ball.speedX;
     ball.y += ball.speedY;
     $(ball.id).css("left", ball.x);
     $(ball.id).css("top", ball.y);
+  }
+
+  startBall();
+
+  function startBall() {
+    ball.x = BOARD_WIDTH / 2;
+    ball.y = BOARD_HEIGHT / 2;
+
+    ball.speedX = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedY = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
   }
 
   
