@@ -37,7 +37,7 @@ body {
   border-radius: 15px;
   position: absolute;
   top: 280px;
-  left: 10px;
+  left: 1px;
 }
 
 #rightPaddle{
@@ -47,7 +47,7 @@ body {
   border-radius: 15px;
   position: absolute;
   top: 280px;
-  left: 1115px;
+  left: 1124px;
 }
 
 #scorePlayer2{
