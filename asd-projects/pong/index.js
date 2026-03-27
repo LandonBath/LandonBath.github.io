@@ -13,14 +13,16 @@ function runProgram(){
   const BOARD_WIDTH = $("#board").width();
   const BOARD_HEIGHT = $("#board").height();
   
-  // Game Item Objects
+  // Game Item Objects, these are the things in our game
   var ball = makeGameItem("#ball");
   var leftPaddle = makeGameItem("#leftPaddle");
   var rightPaddle = makeGameItem("#rightPaddle");
 
+  // Player scores start at 0
   var scorePlayer1 = 0;
   var scorePlayer2 = 0;
 
+  // Update the score display
   $("#scorePlayer1").text(scorePlayer1);
   $("#scorePlayer2").text(scorePlayer2);
 
@@ -33,6 +35,7 @@ function runProgram(){
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  // Create a function that makes a game item object with the necessary properties
  function makeGameItem(id){
   var item = {};
   item.id = id;
@@ -54,6 +57,7 @@ function runProgram(){
   Called in response to events.
   */
  
+  // Handle keydown events for controlling the paddles
   const KEY = {
     W: 87,
     S: 83,
@@ -61,6 +65,7 @@ function runProgram(){
     DOWN: 40
   };
 
+  // Update paddle speeds based on key presses
   function handleKeyDown(event) {
     if (event.which === KEY.W) {
       leftPaddle.speedY = -5;
@@ -73,6 +78,7 @@ function runProgram(){
     }
   }
 
+  // Stop paddle movement when keys are released
   function handleKeyUp(event) {
     if (event.which === KEY.W || event.which === KEY.S) {
       leftPaddle.speedY = 0;
@@ -85,23 +91,26 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  // Handle collisions with walls and scoring
   function wallCollision(obj){
     if (obj.id !== "#ball") {
       if (obj.y <= 0) {
         obj.y = 0;
         obj.speedY = 0;
       }
+      // Prevent paddles from going below the bottom of the board
       if (obj.y + obj.height >= BOARD_HEIGHT) {
         obj.y = BOARD_HEIGHT - obj.height;
         obj.speedY = 0;
       }
     }
 
+    // Handle ball collisions with the top and bottom walls, and scoring when it goes past the left or right edges
     if (obj.id === "#ball") {
       if (obj.y <= 0 || obj.y + obj.height >= BOARD_HEIGHT) {
         obj.speedY *= -1;
       }
-
+      // Check if the ball goes past the left edge player 2 scores
       if (obj.x <= 0) {
         scorePlayer2++;
         $("#scorePlayer2").text(scorePlayer2);
@@ -111,12 +120,11 @@ function runProgram(){
           endGame();
         }
       }
-
+      // Check if the ball goes past the right edge player 1 scores
       if (obj.x + obj.width >= BOARD_WIDTH) {
         scorePlayer1++;
         $("#scorePlayer1").text(scorePlayer1);
         startBall();
-
         if (scorePlayer1 >= 11) {
           alert("Player 1 wins!");
           endGame();
@@ -125,6 +133,7 @@ function runProgram(){
     }
   }
 
+  // Check for collision between two game items
   function doCollide(a, b){
     return !(
       a.x > b.x + b.width ||
@@ -134,6 +143,7 @@ function runProgram(){
     );
   }
 
+  // Move a game item based on its speed and update its position on the screen
   function moveObject(obj) {
     obj.x += obj.speedX;
     obj.y += obj.speedY;
@@ -143,7 +153,7 @@ function runProgram(){
   }
 
   
-  //makes the ball start in a random 
+  // Reset the ball to the center of the board and give it a random speed and direction
   function startBall() {
     ball.x = BOARD_WIDTH / 2 - ball.width / 2;
     ball.y = BOARD_HEIGHT / 2 - ball.height / 2;
@@ -153,6 +163,7 @@ function runProgram(){
   }
   startBall();
 
+// Update the game state and redraw everything for the new frame
   function newFrame(){
     // Object movment every frame
     moveObject(ball);
@@ -162,7 +173,7 @@ function runProgram(){
     wallCollision(ball);
     wallCollision(leftPaddle);
     wallCollision(rightPaddle);
-
+    // Check for collisions between the ball and the paddles
     if (doCollide(ball, leftPaddle) || doCollide(ball, rightPaddle)) {
       ball.speedX = -ball.speedX;
     }
