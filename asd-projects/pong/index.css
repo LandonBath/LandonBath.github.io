@@ -13,7 +13,8 @@ body {
 
 #middleLine{
   background-color: white;
-  width: 1px;
+  
+  width: 4px;
   height: 640px;
   position: absolute;
   left: 570px;

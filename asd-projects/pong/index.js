@@ -64,14 +64,11 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which === KEY.W) {
       leftPaddle.speedY = -5;
-    }
-    if (event.which === KEY.S) {
+    } else if (event.which === KEY.S) {
       leftPaddle.speedY = 5;
-    }
-    if (event.which === KEY.UP) {
+    } else if (event.which === KEY.UP) {
       rightPaddle.speedY = -5;
-    }
-    if (event.which === KEY.DOWN) {
+    } else if (event.which === KEY.DOWN) {
       rightPaddle.speedY = 5;
     }
   }
@@ -79,8 +76,7 @@ function runProgram(){
   function handleKeyUp(event) {
     if (event.which === KEY.W || event.which === KEY.S) {
       leftPaddle.speedY = 0;
-    }
-    if (event.which === KEY.UP || event.which === KEY.DOWN) {
+    } else if (event.which === KEY.UP || event.which === KEY.DOWN) {
       rightPaddle.speedY = 0;
     }
   }
@@ -90,7 +86,6 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
 
   function wallCollision(obj){
-    
     if (obj.id !== "#ball") {
       if (obj.y <= 0) {
         obj.y = 0;
@@ -147,8 +142,8 @@ function runProgram(){
     $(obj.id).css("top", obj.y);
   }
 
-  startBall();
-
+  
+  //makes the ball start in a random 
   function startBall() {
     ball.x = BOARD_WIDTH / 2 - ball.width / 2;
     ball.y = BOARD_HEIGHT / 2 - ball.height / 2;
@@ -156,12 +151,14 @@ function runProgram(){
     ball.speedX = (Math.random() * 3 + 3) * (Math.random() > 0.5 ? -1 : 1);
     ball.speedY = (Math.random() * 3 + 3) * (Math.random() > 0.5 ? -1 : 1);
   }
+  startBall();
 
   function newFrame(){
+    // Object movment every frame
     moveObject(ball);
     moveObject(leftPaddle);
     moveObject(rightPaddle);
-
+    // Collision for ball and paddles
     wallCollision(ball);
     wallCollision(leftPaddle);
     wallCollision(rightPaddle);
