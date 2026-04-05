@@ -30,6 +30,8 @@ function runProgram(){
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on("keydown", handleKeyDown);
   $(document).on("keyup", handleKeyUp); 
+
+  var MAX_SPEED = 15;
   
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -68,13 +70,13 @@ function runProgram(){
   // Update paddle speeds based on key presses
   function handleKeyDown(event) {
     if (event.which === KEY.W) {
-      leftPaddle.speedY = -5;
+      leftPaddle.speedY = -8;
     } else if (event.which === KEY.S) {
-      leftPaddle.speedY = 5;
+      leftPaddle.speedY = 8;
     } else if (event.which === KEY.UP) {
-      rightPaddle.speedY = -5;
+      rightPaddle.speedY = -8;
     } else if (event.which === KEY.DOWN) {
-      rightPaddle.speedY = 5;
+      rightPaddle.speedY = 8;
     }
   }
 
@@ -176,6 +178,17 @@ function runProgram(){
     // Check for collisions between the ball and the paddles
     if (doCollide(ball, leftPaddle) || doCollide(ball, rightPaddle)) {
       ball.speedX = -ball.speedX;
+
+      ball.speedX *= 1.12;
+      ball.speedY *= 1.12;
+
+          // limit speed
+      if (Math.abs(ball.speedX) > MAX_SPEED) {
+        ball.speedX = MAX_SPEED * Math.sign(ball.speedX);
+      }
+      if (Math.abs(ball.speedY) > MAX_SPEED) {
+        ball.speedY = MAX_SPEED * Math.sign(ball.speedY);
+      }
     }
   }
 
