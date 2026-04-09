@@ -28,7 +28,6 @@ async function bubbleSort(array){
 
 // TODO 3: Implement quickSort
 async function quickSort(array, left, right){
-    // FIX: correct condition
     if ((right - left) <= 0){
         return;
     }
