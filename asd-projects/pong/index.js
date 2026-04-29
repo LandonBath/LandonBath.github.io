@@ -31,24 +31,16 @@ function runProgram(){
   $(document).on("keydown", handleKeyDown);
   $(document).on("keyup", handleKeyUp); 
 
+  // Game Item Objects, these are the things in our game like the ball imitating the max speed of the ball and the speed of the paddle that they move at. The max score that the player can get to before the game ends.
   var MAX_SPEED = 15;
+  var maxScore = 11;
+  var paddleSpeed = 5;
   
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  // Create a function that makes a game item object with the necessary properties
- function makeGameItem(id){
-  var item = {};
-  item.id = id;
-  item.x = parseFloat($(id).css("left"));
-  item.y = parseFloat($(id).css("top"));
-  item.width = $(id).width();
-  item.height = $(id).height();
-  item.speedX = 0;
-  item.speedY = 0;
-  return item;
- }
+  
 
   /* 
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
@@ -70,13 +62,13 @@ function runProgram(){
   // Update paddle speeds based on key presses
   function handleKeyDown(event) {
     if (event.which === KEY.W) {
-      leftPaddle.speedY = -8;
+      leftPaddle.speedY = -paddleSpeed;
     } else if (event.which === KEY.S) {
-      leftPaddle.speedY = 8;
+      leftPaddle.speedY = paddleSpeed;
     } else if (event.which === KEY.UP) {
-      rightPaddle.speedY = -8;
+      rightPaddle.speedY = -paddleSpeed;
     } else if (event.which === KEY.DOWN) {
-      rightPaddle.speedY = 8;
+      rightPaddle.speedY = paddleSpeed;
     }
   }
 
@@ -86,6 +78,33 @@ function runProgram(){
       leftPaddle.speedY = 0;
     } else if (event.which === KEY.UP || event.which === KEY.DOWN) {
       rightPaddle.speedY = 0;
+    }
+  }
+
+  // Update the game state and redraw everything for the new frame
+  function newFrame(){
+    // Object movment every frame
+    moveObject(ball);
+    moveObject(leftPaddle);
+    moveObject(rightPaddle);
+    // Collision for ball and paddles
+    wallCollision(ball);
+    wallCollision(leftPaddle);
+    wallCollision(rightPaddle);
+    // Check for collisions between the ball and the paddles
+    if (doCollide(ball, leftPaddle) || doCollide(ball, rightPaddle)) {
+      ball.speedX = -ball.speedX;
+
+      ball.speedX *= 1.12;
+      ball.speedY *= 1.12;
+
+          // limit speed
+      if (Math.abs(ball.speedX) > MAX_SPEED) {
+        ball.speedX = MAX_SPEED * Math.sign(ball.speedX);
+      }
+      if (Math.abs(ball.speedY) > MAX_SPEED) {
+        ball.speedY = MAX_SPEED * Math.sign(ball.speedY);
+      }
     }
   }
 
@@ -117,7 +136,7 @@ function runProgram(){
         scorePlayer2++;
         $("#scorePlayer2").text(scorePlayer2);
         startBall();
-        if (scorePlayer2 >= 11) {
+        if (scorePlayer2 >= maxScore) {
           alert("Player 2 wins!");
           endGame();
         }
@@ -127,7 +146,7 @@ function runProgram(){
         scorePlayer1++;
         $("#scorePlayer1").text(scorePlayer1);
         startBall();
-        if (scorePlayer1 >= 11) {
+        if (scorePlayer1 >= maxScore) {
           alert("Player 1 wins!");
           endGame();
         }
@@ -165,33 +184,18 @@ function runProgram(){
   }
   startBall();
 
-// Update the game state and redraw everything for the new frame
-  function newFrame(){
-    // Object movment every frame
-    moveObject(ball);
-    moveObject(leftPaddle);
-    moveObject(rightPaddle);
-    // Collision for ball and paddles
-    wallCollision(ball);
-    wallCollision(leftPaddle);
-    wallCollision(rightPaddle);
-    // Check for collisions between the ball and the paddles
-    if (doCollide(ball, leftPaddle) || doCollide(ball, rightPaddle)) {
-      ball.speedX = -ball.speedX;
-
-      ball.speedX *= 1.12;
-      ball.speedY *= 1.12;
-
-          // limit speed
-      if (Math.abs(ball.speedX) > MAX_SPEED) {
-        ball.speedX = MAX_SPEED * Math.sign(ball.speedX);
-      }
-      if (Math.abs(ball.speedY) > MAX_SPEED) {
-        ball.speedY = MAX_SPEED * Math.sign(ball.speedY);
-      }
-    }
-  }
-
+  // Create a function that makes a game item object with the necessary properties
+ function makeGameItem(id){
+    var item = {};
+    item.id = id;
+    item.x = parseFloat($(id).css("left"));
+    item.y = parseFloat($(id).css("top"));
+    item.width = $(id).width();
+    item.height = $(id).height();
+    item.speedX = 0;
+    item.speedY = 0;
+    return item;
+ }
   
   function endGame() {
     // stop the interval timer
